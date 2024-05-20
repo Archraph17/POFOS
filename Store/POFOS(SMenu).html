@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+  <link rel="stylesheet" href="POFOS(SMenu).css">
+  </head>
+  
+  <body data-spy="scroll" data-target=".menu-content" data-offset="50">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="row mr-1">
+            <div class="navbar-nav">
+                <button class="receipt-button" onclick="location.href='POFOS(SReceipt).html'"><i class="fas fa-receipt"></i> Receipt</button>
+                <button class="logout-button" onclick="location.href='POFOS(SLogin).html'">Logout</button>
+            </div>            
+        </div>
+      </nav>      
+      
+
+    <div class="main-container mt-4 ml-5 mr-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 cart-container">
+                    <h2 style="text-align: center;"><strong>Customer's Orders</strong></h2>
+                    <div class="status-container">
+                            <div class="cart-card">
+                                <div class="col">
+                                    <div class="statinfo-container" id="statusInfo"><strong>ID & IE:</strong></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="cart-item">Order Details</div>
+                                </div>
+                                <div class="col">
+                                    <div class="cart-item">Quantity</div>
+                                </div>
+                                <div class="col">
+                                    <div class="cart-item">Price</div>
+                                </div>
+                        </div>
+                        <div class="container reciept-container justify-content-between">
+                            <div class="row">
+                            <div class="col">
+                            <span>Total: <span id="totalAmount"></span></span>
+                            </div>
+                            <div class="col">
+                                <span for="amount" class="form-label">Cash Amount:</span>
+                            </div>
+                            <div class="col">
+                            <span>Change: <span id="changeAmount"></span></span>
+                        </div>
+                        <div class="col">
+                        <button class="btn" id="checkoutBtn">Accept</button></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+    
+                <!-- Menu and content -->
+                <div class="col menu-container">
+                    <!-- Move the menu div inside the menu-container -->
+                    <div class="menu md-auto mb-3">
+                        <div class="col-md-2">
+                            <button class="menu-button" onclick="showMenu('meal')" autofocus>Meal</button>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="menu-button" onclick="showMenu('drinks')">Drinks</button>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="menu-button" onclick="showMenu('snacks')">Snacks</button>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="menu-button" onclick="showMenu('dessert')">Dessert</button>
+                          </div>
+                    </div>
+
+                    <!-- Menu content -->
+                    <div class="col-auto menu-content">
+                        <h2 style="text-align: center;">Menu</h2>
+                        <!-- Menu items -->
+                        <div class="menu-item meal">
+                            <div class="row mb-3">
+                                <div class="col-md-4 mb-3">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Rice n Porkchop w/Egg</h6>
+                                        <h6>Php 50</h6>
+                                        <div class="button-group">
+                                            <button class="ordernow" id="availableButton1" onclick="toggleAvailability('availableButton1')">Available</button>
+                                            <a href="POFOS(SEdit).html" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                        </div>                                        
+                                    </div>
+                                </div>                                
+                                <div class="col-md-4 mb-3">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Rice n Hotdog w/Egg</h6>
+                                        <h6>Php 50</h6>
+                                        <button class="ordernow" id="availableButton14" onclick="toggleAvailability('availableButton14')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Rice n Porkchop w/Egg</h6>
+                                        <h6>Php 50</h6>
+                                        <button class="ordernow" id="availableButton2" onclick="toggleAvailability('availableButton2')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Rice n Tapa w/Egg</h6>
+                                        <h6>Php 50</h6>
+                                        <button class="ordernow" id="availableButton3" onclick="toggleAvailability('availableButton3')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Rice n  w/Egg</h6>
+                                        <h6>Php 50</h6>
+                                        <button class="ordernow" id="availableButton4" onclick="toggleAvailability('availableButton4')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item drinks">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Mismo Coca Cola</h6>
+                                        <h6>Php 20</h6>
+                                        <button class="ordernow" id="availableButton5" onclick="toggleAvailability('availableButton5')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Mismo Sprite</h6>
+                                        <h6>Php 20</h6>
+                                        <button class="ordernow" id="availableButton6" onclick="toggleAvailability('availableButton6')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Mismo Royal</h6>
+                                        <h6>Php 20</h6>
+                                        <button class="ordernow" id="availableButton7" onclick="toggleAvailability('availableButton7')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item snacks">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Piatos</h6>
+                                        <h6>Php 15</h6>
+                                        <button class="ordernow" id="availableButton8" onclick="toggleAvailability('availableButton8')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Tomi</h6>
+                                        <h6>Php 8</h6>
+                                        <button class="ordernow" id="availableButton9" onclick="toggleAvailability('availableButton9')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Nova</h6>
+                                        <h6>Php 15</h6>
+                                        <button class="ordernow" id="availableButton10" onclick="toggleAvailability('availableButton10')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item dessert">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Shake</h6>
+                                        <h6>Php 30</h6>
+                                        <button class="ordernow" id="availableButton11" onclick="toggleAvailability('availableButton11')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6>Ice Cream</h6>
+                                        <h6>Php 30</h6>
+                                        <button class="ordernow" id="availableButton12" onclick="toggleAvailability('availableButton12')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="food">
+                                        <img src="burger1.jpg" width="150px" height="100px">
+                                        <h6></h6>
+                                        <h6>Php 50</h6>
+                                        <button class="ordernow" id="availableButton13" onclick="toggleAvailability('availableButton13')">Available</button>
+                                        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="POFOS(SCreate).html">
+                        <button class="plus-icon-btn">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+        // Hide all menu items except for the specified type
+        function showMenu(menuType) {
+            var menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item) {
+                item.style.display = 'none';
+            });
+
+            var selectedMenuItems = document.querySelectorAll('.menu-item.' + menuType);
+            selectedMenuItems.forEach(function(item) {
+                item.style.display = 'block';
+            });
+        }
+
+        // Show only the 'meal' menu items initially
+        window.onload = function() {
+            showMenu('meal');
+        };
+
+        function toggleAvailability(buttonId) {
+        var button = document.getElementById(buttonId);
+        if (button.innerText === "Available") {
+            button.innerText = "Unavailable";
+            button.style.backgroundColor = "#808080"; // Change button color to gray
+        } else {
+            button.innerText = "Available";
+            button.style.backgroundColor = ""; // Reset button color
+        }
+    }
+
+
+
+    </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Menu</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+    <style>
+        body {
+            background-color: #7AA765;
+            font-family: 'Inria Sans', sans-serif;
+        }
+
+        .navbar {
+            background-color: #29774D;
+            border: solid 1px #EFC900;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar-brand img {
+            max-height: 10%;
+            max-width: 10%;
+        }
+
+        .back-button {
+            background-color: #7AA765;
+            height: auto;
+            width: auto;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid black;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh; /* Full viewport height */
+        }
+
+        .menu-form {
+            border: black solid 2px;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%; /* Adjust width as needed */
+            max-width: 400px; /* Limit maximum width */
+        }
+        
+            /* Hide the default file input button */
+    input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
+
+    /* Style the custom file input button */
+    .custom-file-upload {
+        cursor: pointer;
+        padding: 6px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                max-height: 40px;
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="POFOS(SMenu).html">
+            <img src="image.png" alt="PLMUN Logo">
+        </a>
+        <a class="back-button" style="color: black; text-decoration-line: none;" href="POFOS(SMenu).html"><strong>Back</strong></a>
+    </nav>
+
+    <div class="container">
+        <div class="menu-form">
+            <h2><strong>Edit Menu</strong></h2>
+            <form>
+                <div class="form-group row">
+                    <label for="image" class="col-auto col-form-label">Image:</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <!-- Custom file input button -->
+                            <label class="input-group-append" for="image">
+                                <span class="input-group-text custom-file-upload">
+                                    <i class="fas fa-upload"></i> Upload
+                                </span>
+                            </label>
+                            <!-- Actual file input -->
+                            <input type="file" class="form-control" id="image">
+                        </div>
+                    </div>
+                </div>           
+                <div class="form-group row">
+                    <label for="food-name" class="col-auto col-form-label">Food Name:</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="food-name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="price" class="col-auto col-form-label">Price:</label>
+                    <div class="col-sm-5">
+                        <input type="number" class="form-control" id="price">
+                    </div>
+                </div>                
+                <button type="addMenu" class="btn btn-primary">Add Menu</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
