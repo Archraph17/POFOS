@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLMUN Login</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+  <link rel="stylesheet" href="POFOS(Login).css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-name">
+      <h1 class="logo-text" style="margin-left: 10px;"><b>PLMUN</b></h1>
+      <h5 class="food-stall" style="margin-left: 10px;">Emerald Hall Food Stall</h5>
+    </div>
+    <div class="login-box">
+      <h1 class="mb-3"><strong>SIGN IN</strong></h1>
+      <form id="login-form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="" id="username">
+          <label for="username" class="form-label">Student/Faculty ID</label>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="" id="password">
+          <label for="password" class="form-label">PIN</label>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <a class="link" href="https://plmun.edu.ph/student-portal/system/main/forgot_password.php" style="color: black;">Forget Pin?</a>
+          </div>
+          <div class="col-auto ml-5">
+            <a class="link" href="#" id="sync-account-link" style="color: black;">Sync Account</a>
+          </div>
+        </div>        
+        <div class="form-group row">
+          <div class="col">
+            <!-- Empty column to create space -->
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-primary btn-block" id="login-btn">Login</button>
+          </div>
+        </div>
+      </form>
+      <form id="sync-account-form" style="display: none;">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="" id="username">
+          <label for="username" class="form-label">Institutional Email</label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="" id="password">
+          <label for="number" class="form-label">ID Number</label>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <a class="link" href="POFOS(Login).html" style="color: black;">Already Sync?</a>
+          </div>
+        </div>        
+        <div class="form-group row">
+          <div class="col">
+            <!-- Empty column to create space -->
+          </div>
+          <div class="col-auto">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#syncModal">Sync Account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="syncModal" tabindex="-1" aria-labelledby="syncModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="syncModalLabel">Successfully Synchronize</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Please proceed to the Sign In for confirmation of the sync account. Thank you!
+        </div>
+        <div class="modal-footer">
+          <a id="syncLink" href="POFOS(Login).html" class="btn btn-primary">Proceed</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="javascript.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  <script>
+$(document).ready(function() {
+  // Switch between login form and sync account form
+  $('#sync-account-link').click(function() {
+    $('#login-form').hide();
+    $('#sync-account-form').show();
+    // Change the title of the sync account form to strong
+    $('.mb-3').html('<strong>SYNC ACCOUNT</strong>');
+  });
+
+      $('#login-btn').click(function() {
+        // Perform login action
+        // For demonstration, you can redirect to home page
+        window.location.href = "POFOS(Home).html";
+      });
+
+      $('#sync-btn').click(function() {
+        // Perform sync account action
+        // For demonstration, you can show a success message or redirect to home page
+        alert('Account Synced Successfully!');
+        window.location.href = "POFOS(Home).html";
+      });
+    });
+  </script>
+</body>
+</html>

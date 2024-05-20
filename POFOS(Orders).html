@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="POFOS(Orders).css">
+  <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="POFOS(Home).html">
+      <img src="image.png" alt="PLMUN Logo">
+    </a>
+    <a class="back-button" style="color: black; text-decoration-line: none;" href="POFOS(Home).html">Back</a>
+  </nav>
+
+  <h4 style="text-align: center; margin: 20px;"><strong>Orders</strong></h4>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Container for orders -->
+        <div class="orders-container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body" id="orderCardBody">
+                  <h5 class="card-title">Store Name: <span id="storeName"></span></h5>
+                  <!-- Order details will be added here dynamically -->
+                  <div id="orderDetails">
+                  </div>
+                  <button id="removeAllButton" class="btn btn-danger mt-3">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="checkout-container1">
+            <div class="checkout-container" id="checkoutContainer">
+            <!-- Checkout content will be added here dynamically -->
+          </div><hr>
+          <div class="checkout-controls" id="checkoutControls" style="display: none;">
+            <h6><span id="totalAmount"></span></h6>
+            <h6><span id="cashAmount"></span></h6>
+            <h6><span id="totalChange"></span></h6>
+            <button id="checkoutButton" class="checkout-button">Checkout</button>
+          </div> 
+          </div>                 
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Retrieve the store name from the query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const storeName = urlParams.get('store');
+
+// Set the store name to the span element
+document.getElementById('storeName').textContent = storeName;
+
+// Retrieve cart items from local storage
+var receiptInfo = localStorage.getItem('receiptInfo');
+if (receiptInfo) {
+    receiptInfo = JSON.parse(receiptInfo);
+    var cartOrders = receiptInfo.cartOrders;
+
+    // Display cart orders on the page
+    var orderDetails = document.getElementById('orderDetails');
+    cartOrders.forEach(function(order, index) {
+        var orderItem = document.createElement('div');
+        orderItem.textContent = order.foodName + ' - Quantity: ' + order.quantity + ', Price: ' + order.price;
+        orderDetails.appendChild(orderItem);
+    });
+
+    // Display total, cash amount, and change
+    document.getElementById('totalAmount').textContent = 'Total: Php ' + receiptInfo.totalAmount;
+    document.getElementById('cashAmount').textContent = 'Cash Amount: Php ' + receiptInfo.cashAmount;
+    document.getElementById('totalChange').textContent = 'Total Change: Php ' + receiptInfo.change;
+}
+
+// Add click event to card-body
+document.getElementById('orderCardBody').addEventListener('click', function() {
+    // Toggle display of checkout controls
+    var checkoutControls = document.getElementById('checkoutControls');
+    checkoutControls.style.display = checkoutControls.style.display === 'none' ? 'block' : 'none';
+});
+
+// Add click event to Remove All button
+document.getElementById('removeAllButton').addEventListener('click', function() {
+    // Remove all items from the cart
+    localStorage.removeItem('receiptInfo');
+    location.reload(); // Refresh the page to reflect changes
+});
+
+// Add click event to Checkout button
+document.getElementById('checkoutButton').addEventListener('click', function() {
+    // Redirect to the receipt page with order details
+    var orderDetails = encodeURIComponent(JSON.stringify(receiptInfo));
+    window.location.href = 'POFOS(Receipt).html?orderDetails=' + orderDetails;
+});
+  </script>
+</body>
+</html>

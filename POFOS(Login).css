@@ -1,0 +1,95 @@
+body {
+  font-family: 'Inria Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #7AA765;
+  background-image: url(IMG_6333.JPG);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.logo-name{
+  text-align: center;
+}
+.login-box {
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Add box shadow */}
+
+.login-box img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.login-box h1 {
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-size: 24px;
+  color: #29774D; /* Green color for title */
+}
+
+.textbox {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.btn {
+  margin-top: 5px;
+  width: auto;
+  background: #84C33C; /* Green color for button */
+  border: 1px solid black;
+  padding: auto;
+  cursor: pointer;
+  border-radius: 10px;
+  color: black;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  border: 1px solid black;
+  color: black;
+  background: #29774D; /* Darker green color on hover */
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-label {
+  position: absolute;
+  left: 12px;
+  top: 15px;
+  color: #999;
+  font-size: 16px;
+  transition: top 0.4s, font-size 0.3s;
+}
+
+.form-control {
+  padding-top: 25px;
+  height: 50px;
+}
+
+.form-control:focus + .form-label, .form-control:not(:placeholder-shown) + .form-label {
+  top: 2px;
+  font-size: 12px;
+}
+
+.form-control:focus {
+  padding-top: 25px;
+}
+
+.form-control:focus + .form-label {
+  color: #000000;
+}
+

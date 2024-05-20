@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+  <link rel="stylesheet" href="POFOS(Home).css">
+</head>
+<body>
+<div class="overlay">
+  <nav class="navbar navbar-dark">
+    <a class="navbar-brand" href="POFOS(Home).html">
+      <img src="image.png" alt="PLMUN Logo">
+      <h1 class="logo-text" style="margin-left: 10px;"><b>PLMUN</b></h1>
+      <h5 class="food-stall" style="margin-left: 10px;">Food<br>Stall</h5>
+    </a>
+    <button class="navbar-toggler mr-2 custom-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    </div>
+  </nav>
+  
+  
+  
+  <div class="sidebar" id="sidebar">
+    <ul class="navbar-nav ml-2 mt-1">
+      <li class="nav-item mt-1 active">
+        <a class="nav-link" href="POFOS(Orders).html">View Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="POFOS(Account).html"><i class="fa-regular fa-user" style="margin-right: 10px;"></i>View Accounts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="POFOS(OHistory).html"><i class="fa-solid fa-receipt" style="margin-right: 10px;"></i>View Order History</a>
+      </li>
+    </ul>
+    <div class="logout-container">
+      <a href="POFOS(Login).html" class="btn btn-outline-dark ml-3 w-75" onclick="logout()">Logout</a>
+    </div>
+  </div>  
+
+  <div class="container-fluid homepage-content">
+    <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <div class="main-container">
+          <div class="row">
+            <div class="col-md-auto main-content-container">
+              <div class="col-md-auto main-content">
+                <h2><strong>Welcome Consumer (Name)!</strong></h2>
+              </div>
+              <div class="col-md-auto paragraph-container">
+                <i>“Pick your store that you liked and we’ll serve what you deserve.”</i>
+              </div>
+            </div>
+            <div class="col-md-10 mt-1 main-content-container">
+              <div class="col-md-auto main-content">
+                <h2><strong>!REMINDER!</strong></h2>
+              </div>
+              <div class="col-md-auto paragraph-container">
+                <i>You are unable to order with 1 unsettled order, please comply to that store first. Thank you!</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mt-4">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="2000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="Login.png" class="d-block w-100 carousel-img" alt="Advertisement">
+            </div>
+            <div class="carousel-item">
+              <img src="Login.png" class="d-block w-100 carousel-img" alt="Advertisement">
+            </div>
+            <div class="carousel-item">
+              <img src="Login.png" class="d-block w-100 carousel-img" alt="Advertisement">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>           
+    </div>
+  </div>
+  
+  
+  
+  
+  
+
+  <div class="store-container col-md-auto">
+    <h2 class="store" style="text-align: center;"><strong> Stores </strong></h2>
+    <div class="row mt-3">
+      <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=TasteTalkers.jpg&store=Taste%20Talkers" class="store-link">
+          <img src="TasteTalkers.jpg" class="img-fluid img-button" alt="Image 1">
+      </a>      
+      </div>
+      <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=Alfreshco.jpg&store=Alfreshco" class="store-link">
+            <img src="Alfreshco.jpg" class="img-fluid img-button" alt="Image 2">
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=Cacera.jpg&store=Cacera" class="store-link">
+            <img src="Cacera.jpg" class="img-fluid img-button" alt="Image 3">
+        </a>
+    </div>
+    </div>
+    <div class="row mt-1">
+    <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=Rd.jpg&store=Rd" class="store-link">
+            <img src="Rd.jpg" class="img-fluid img-button" alt="Image 1">
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=Tahoo.jpg&store=Tahoo" class="store-link">
+            <img src="Tahoo.jpg" class="img-fluid img-button" alt="Image 2">
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="POFOS(Menu).html?image=Sabel.jpg&store=Sabel" class="store-link">
+            <img src="Sabel.jpg" class="img-fluid img-button" alt="Image 1">
+        </a>
+    </div>
+    
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-4 mb-3">
+          <a href="POFOS(Menu).html?image=SerChx.jpg&store=SerChx" class="store-link">
+              <img src="SerChx.jpg" class="img-fluid img-button" alt="Image 1">
+          </a>
+      </div>
+      <div class="col-md-4 mb-3">
+          <a href="POFOS(Menu).html?image=Kawani.jpg&store=Kawani" class="store-link">
+              <img src="Kawani.jpg" class="img-fluid img-button" alt="Image 2">
+          </a>
+      </div>
+      <div class="col-md-4 mb-3">
+          <a href="POFOS(Menu).html?image=Gastriquest.jpg&store=Gastriquest" class="store-link">
+              <img src="Gastriquest.jpg" class="img-fluid img-button" alt="Image 3">
+          </a>
+      </div>
+      <div class="col-md-4 mb-3">
+          <a href="POFOS(Menu).html?image=Chipmunks.jpg&store=Chipmunks" class="store-link">
+              <img src="Chipmunks.jpg" class="img-fluid img-button" alt="Image 3">
+          </a>
+      </div>
+  </div>
+  
+  </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    
+    function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('show');
+
+  var homepageContent = document.querySelector('.homepage-content');
+  var storeContainer = document.querySelector('.store-container');
+  homepageContent.classList.toggle('blur'); // Toggle blur effect on homepage content
+  storeContainer.classList.toggle('blur'); // Toggle blur effect on store container
+
+  // Toggle pointer events
+  if (sidebar.classList.contains('show')) {
+    homepageContent.classList.add('unclickable');
+    storeContainer.classList.add('unclickable');
+  } else {
+    homepageContent.classList.remove('unclickable');
+    storeContainer.classList.remove('unclickable');
+  }
+}
+
+document.addEventListener('click', function(event) {
+  var sidebar = document.getElementById('sidebar');
+  var sidebarButton = document.querySelector('.navbar-toggler');
+
+  if (!sidebar.contains(event.target) && !sidebarButton.contains(event.target)) {
+    sidebar.classList.remove('show');
+
+    var homepageContent = document.querySelector('.homepage-content');
+    var storeContainer = document.querySelector('.store-container');
+    homepageContent.classList.remove('blur'); // Remove blur effect on homepage content when sidebar is closed
+    storeContainer.classList.remove('blur'); // Remove blur effect on store container when sidebar is closed
+
+    homepageContent.classList.remove('unclickable'); // Make homepage clickable again
+    storeContainer.classList.remove('unclickable'); // Make store container clickable again
+  }
+});
+
+
+
+
+$(document).ready(function(){
+    // Trigger the carousel sliding animation
+    $('.carousel').carousel({
+      interval: 2000, // Set the interval in milliseconds
+      pause: false // Set to true if you want to pause on hover
+    });
+  });
+  </script>
+</body>
+</html>
