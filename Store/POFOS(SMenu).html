@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu page</title>
+  <title>Store Menu page</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -12,72 +12,84 @@
   </head>
   
   <body data-spy="scroll" data-target=".menu-content" data-offset="50">
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="row mr-1">
-            <div class="navbar-nav">
-                <button class="receipt-button" onclick="location.href='POFOS(SReceipt).html'"><i class="fas fa-receipt"></i> Receipt</button>
-                <button class="logout-button" onclick="location.href='POFOS(SLogin).html'">Logout</button>
-            </div>            
-        </div>
-      </nav>      
+<!-- Navbar -->
+<nav class="navbar">
+      <div class="navbar-nav">
+        <button class="account-button mr-2" onclick="location.href='#'"><i class="fas fa-user"></i> Account</button>
+          <button class="receipt-button mr-2" id="receiptBtn" onclick="location.href='POFOS(SReceipt).html'"><i class="fas fa-receipt"></i> Receipt</button>
+          <button class="logout-button" onclick="location.href='POFOS(SLogin).html'">Logout</button>
+      </div>            
+</nav>
       
 
     <div class="main-container mt-4 ml-5 mr-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5 cart-container">
+                <div class="col-md-5   cart-container">
                     <h2 style="text-align: center;"><strong>Customer's Orders</strong></h2>
                     <div class="status-container">
                             <div class="cart-card">
-                                <div class="col">
-                                    <div class="statinfo-container" id="statusInfo"><strong>ID & IE:</strong></div>
-                                </div>
+                              <div class="col-md-auto d-flex justify-content-between">
+                                <div class="statinfo-container" id="statusInfo"><strong>Name & ID: (Consumer's Name)/(Consumer's ID)</strong></div>
+                                <div class="status-bar"></div>
+                            </div>                            
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="cart-item">Order Details</div>
-                                </div>
-                                <div class="col">
-                                    <div class="cart-item">Quantity</div>
-                                </div>
-                                <div class="col">
-                                    <div class="cart-item">Price</div>
-                                </div>
-                        </div>
+                            <div class="order-details">
+                              <div class="row">
+                                  <div class="col-auto">
+                                      <div class="cart-item">Order Details</div>
+                                      <ul id="orderDetailsList" class="list-unstyled"></ul>
+                                  </div>
+                                  <div class="col">
+                                      <div class="cart-item">Quantity</div>
+                                      <ul id="quantityList" class="list-unstyled" style="text-align: center;"></ul>
+                                  </div>
+                                  <div class="col">
+                                      <div class="cart-item">Price</div>
+                                      <ul id="priceList" class="list-unstyled" style="text-align: center;"></ul>
+                                  </div>
+                              </div>
+                          </div>
+                          
                         <div class="container reciept-container justify-content-between">
                             <div class="row">
-                            <div class="col">
+                            <div class="col-auto">
                             <span>Total: <span id="totalAmount"></span></span>
                             </div>
-                            <div class="col">
-                                <span for="amount" class="form-label">Cash Amount:</span>
+                            <div class="col-auto">
+                                <span>Cash Amount:<span id="cashAmount"></span></span>
                             </div>
-                            <div class="col">
+                            <div class="col-auto">
                             <span>Change: <span id="changeAmount"></span></span>
                         </div>
-                        <div class="col">
-                        <button class="btn" id="checkoutBtn">Accept</button></div>
                         </div>
-                    </div>
+                        <div class="row justify-content-between align-items-center">
+                          <div class="order-number-container col-auto">
+                              <strong>Order No. <span id="orderNumber"></span></strong>
+                          </div>
+                          <div class="col-auto">
+                              <button class="btn" id="checkoutBtn">Accept</button>
+                          </div>
+                      </div>                      
+                        </div>
                     </div>
                 </div>
     
                 <!-- Menu and content -->
                 <div class="col menu-container">
                     <!-- Move the menu div inside the menu-container -->
-                    <div class="menu md-auto mb-3">
-                        <div class="col-md-2">
-                            <button class="menu-button" onclick="showMenu('meal')" autofocus>Meal</button>
+                    <div class="menu md-auto mb-3 mt-2">
+                        <div class="col-md-auto">
+                            <button class="menu-button" onclick="showMenu('meal')" autofocus>Meals</button>
                           </div>
-                          <div class="col-md-2">
+                          <div class="col-md-auto">
+                            <button class="menu-button" onclick="showMenu('snacks')">Sandwiches</button>
+                          </div>
+                          <div class="col-md-auto">
                             <button class="menu-button" onclick="showMenu('drinks')">Drinks</button>
                           </div>
-                          <div class="col-md-2">
-                            <button class="menu-button" onclick="showMenu('snacks')">Snacks</button>
-                          </div>
-                          <div class="col-md-2">
-                            <button class="menu-button" onclick="showMenu('dessert')">Dessert</button>
+                          <div class="col-md-auto">
+                            <button class="menu-button" onclick="showMenu('dessert')">Desserts</button>
                           </div>
                     </div>
 
@@ -94,7 +106,10 @@
                                         <h6>Php 50</h6>
                                         <div class="button-group">
                                             <button class="ordernow" id="availableButton1" onclick="toggleAvailability('availableButton1')">Available</button>
-                                            <a href="POFOS(SEdit).html" class="edit-btn"><i class="fas fa-edit"></i></a>
+                                            <a href="POFOS(SEdit).html?foodName=Rice%20n%20Porkchop%20w/Egg&price=50">
+                                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                            </a>
+                                            
                                         </div>                                        
                                     </div>
                                 </div>                                
@@ -230,7 +245,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="POFOS(SCreate).html">
+                    <a href="#" data-toggle="modal" data-target="#addItemModal">
                         <button class="plus-icon-btn">
                           <i class="fas fa-plus"></i>
                         </button>
@@ -244,38 +259,250 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- Modal -->
+  <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="itemName">Food Name</label>
+              <input type="text" class="form-control" id="itemName" placeholder="Enter food name">
+            </div>
+            <div class="form-group">
+              <label for="itemPrice">Price</label>
+              <input type="text" class="form-control" id="itemPrice" placeholder="Enter price">
+            </div>
+            <div class="form-group">
+              <label for="itemImage">Image URL</label>
+              <input type="file" class="form-control" id="itemImage" placeholder="Enter image URL">
+            </div>
+          </form>
+        </div><hr>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addMenuItem()">Add Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script>
 
-        // Hide all menu items except for the specified type
-        function showMenu(menuType) {
-            var menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(function(item) {
-                item.style.display = 'none';
-            });
+// Define status constants
+const STATUS_PENDING = "Pending";
+const STATUS_PREPPING = "Prepping";
+const STATUS_SERVING = "Serving";
+const STATUS_CLAIMED = "Claimed Order";
+const STATUS_UNCLAIMED = "Unclaimed Order";
 
-            var selectedMenuItems = document.querySelectorAll('.menu-item.' + menuType);
-            selectedMenuItems.forEach(function(item) {
-                item.style.display = 'block';
-            });
-        }
+// Function to update the status bar
+function updateStatusBar(status) {
+    var statusBar = document.querySelector('.status-bar');
+    statusBar.style.fontWeight = "bold"; // Set text to bold
+    statusBar.style.backgroundColor = "transparent"; // Set background color to transparent
+    statusBar.textContent = status;
+}
 
-        // Show only the 'meal' menu items initially
-        window.onload = function() {
-            showMenu('meal');
-        };
+// Update status bar initially to "Pending"
+updateStatusBar(STATUS_PENDING);
 
-        function toggleAvailability(buttonId) {
-        var button = document.getElementById(buttonId);
-        if (button.innerText === "Available") {
-            button.innerText = "Unavailable";
-            button.style.backgroundColor = "#808080"; // Change button color to gray
-        } else {
-            button.innerText = "Available";
-            button.style.backgroundColor = ""; // Reset button color
-        }
+// Function to handle the checkout button click
+document.getElementById('checkoutBtn').addEventListener('click', function() {
+    var checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn.textContent === "Accept") {
+        // Change the status bar to "Prepping" when the button says "Accept"
+        updateStatusBar(STATUS_PREPPING);
+        checkoutBtn.textContent = STATUS_SERVING;
+    } else if (checkoutBtn.textContent === STATUS_SERVING) {
+        // Change the status bar to "Serving" when the button says "Serving"
+        updateStatusBar(STATUS_SERVING);
+        checkoutBtn.textContent = STATUS_CLAIMED;
+        // Add the "Unclaimed Order" button
+        var unclaimedOrderBtn = document.createElement('button');
+        unclaimedOrderBtn.textContent = STATUS_UNCLAIMED;
+        unclaimedOrderBtn.classList.add('btn', 'btn-danger', 'mr-2'); // Add Bootstrap class for red color and margin-right
+        unclaimedOrderBtn.id = 'unclaimedOrderBtn';
+        unclaimedOrderBtn.addEventListener('click', function() {
+            // Change the status bar back to "Serving" when "Unclaimed Order" button is clicked
+            updateStatusBar(STATUS_SERVING);
+            checkoutBtn.textContent = STATUS_SERVING;
+            // Change the appearance of the cart-card to red
+            var cartCard = document.querySelector('.cart-card');
+            cartCard.style.backgroundColor = '#f17978';
+            // Remove the "Unclaimed Order" button
+            unclaimedOrderBtn.remove();
+            // Add a short delay before clearing the cart container contents and redirecting to the receipt page
+            setTimeout(function() {
+                // Clear the cart container contents
+                var cartContainer = document.querySelector('.status-container');
+                cartContainer.innerHTML = '';
+                // Redirect to the receipt page
+                showReceiptNotification();
+            }, 2000); // Adjust the delay time as needed
+        });
+        // Add the "Unclaimed Order" button before the "Claimed Order" button
+        checkoutBtn.parentNode.insertBefore(unclaimedOrderBtn, checkoutBtn);
+    } else {
+        // Change the status bar to "Claimed Order" when the button says "Claim Order"
+        updateStatusBar(STATUS_CLAIMED);
+        checkoutBtn.disabled = true; // Assuming the button should be disabled after claiming the order
+        // Add a short delay before redirecting to the receipt page
+        setTimeout(function() {
+            // Redirect to the receipt page
+            showReceiptNotification();
+        }, 2000); // Adjust the delay time as needed
+    }
+});
+
+// Function to show the receipt notification
+function showReceiptNotification() {
+    // Create a div element for the notification indicator
+    var notificationIndicator = document.createElement('div');
+    // Apply styles to make it look like a small circle dot
+    notificationIndicator.classList.add('notification-dot');
+    // Append the notification indicator to the receipt button
+    document.getElementById('receiptBtn').appendChild(notificationIndicator);
+}
+
+
+
+
+
+            // Hide all menu items except for the specified type
+    function showMenu(menuType) {
+      var menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(function(item) {
+        item.style.display = 'none';
+      });
+
+      var selectedMenuItems = document.querySelectorAll('.menu-item.' + menuType);
+      selectedMenuItems.forEach(function(item) {
+        item.style.display = 'block';
+      });
     }
 
+    // Show only the 'meal' menu items initially
+    window.onload = function() {
+      showMenu('meal');
+    };
 
+    function toggleAvailability(buttonId) {
+      var button = document.getElementById(buttonId);
+      if (button.innerText === "Available") {
+        button.innerText = "Unavailable";
+        button.style.backgroundColor = "#808080"; // Change button color to gray
+      } else {
+        button.innerText = "Available";
+        button.style.backgroundColor = ""; // Reset button color
+      }
+    }
+
+      // Function to handle the submission of the form in the modal
+  function addMenuItem() {
+    // Get the values from the form fields
+    var itemName = document.getElementById('itemName').value;
+    var itemPrice = document.getElementById('itemPrice').value;
+    var itemImage = document.getElementById('itemImage').value;
+
+    // Create the new menu item element
+    var newMenuItem = document.createElement('div');
+    newMenuItem.classList.add('col-md-4', 'mb-3');
+    newMenuItem.innerHTML = `
+      <div class="food">
+        <img src="${itemImage}" width="150px" height="100px">
+        <h6>${itemName}</h6>
+        <h6>Php ${itemPrice}</h6>
+        <button class="ordernow" onclick="toggleAvailability('availableButton${generateRandomId()}')">Available</button>
+        <button class="edit-btn"><i class="fas fa-edit"></i></button>
+      </div>
+    `;
+
+    // Append the new menu item to the "meal" section
+    var mealSection = document.querySelector('.menu-item.meal');
+    mealSection.appendChild(newMenuItem);
+
+    // Close the modal
+    $('#addItemModal').modal('hide');
+  }
+
+  // Function to generate a random ID for availableButton
+  function generateRandomId() {
+    return Math.floor(Math.random() * 13);
+  }
+
+
+// Function to populate the order details section and calculate total, amount, and change
+function populateOrderDetails() {
+    var orderDetailsList = document.getElementById('orderDetailsList');
+    var quantityList = document.getElementById('quantityList');
+    var priceList = document.getElementById('priceList');
+    var receiptInfo = JSON.parse(localStorage.getItem('receiptInfo'));
+    if (receiptInfo) {
+        // Clear the lists before populating them again
+        orderDetailsList.innerHTML = '';
+        quantityList.innerHTML = '';
+        priceList.innerHTML = '';
+
+        var totalAmount = 0;
+
+        // Iterate over the array to create list items for each order detail and calculate total
+        receiptInfo.cartOrders.forEach(function(order) {
+            var orderDetailItem = document.createElement('li');
+            var quantityItem = document.createElement('li');
+            var priceItem = document.createElement('li');
+
+            orderDetailItem.textContent = order.foodName;
+            quantityItem.textContent = order.quantity;
+            priceItem.textContent = order.price;
+
+            orderDetailsList.appendChild(orderDetailItem);
+            quantityList.appendChild(quantityItem);
+            priceList.appendChild(priceItem);
+
+            // Retrieve total amount, cash amount, and total change from local storage
+          var totalAmount = localStorage.getItem('totalAmount');
+          var cashAmount = localStorage.getItem('cashAmount');
+          var changeAmount = localStorage.getItem('changeAmount');
+            // Display these values on the store menu page as needed
+          document.getElementById('totalAmount').textContent = 'Php ' + parseFloat(totalAmount).toFixed(2);
+          document.getElementById('cashAmount').textContent = 'Php '+ parseFloat(cashAmount).toFixed(2);
+          document.getElementById('changeAmount').textContent = 'Php ' + parseFloat(changeAmount).toFixed(2);
+        });
+
+    }
+}
+
+// Function to generate and display the order number
+function generateOrderNumber() {
+    var orderNumberElement = document.getElementById('orderNumber');
+    // Check if the order number is already stored in local storage
+    var orderNumber = localStorage.getItem('orderNumber');
+    if (!orderNumber) {
+        // Generate a random order number between 10 and 999 (2 or 3 digits)
+        orderNumber = Math.floor(Math.random() * 99) + 10; // Random number between 10 and 999
+        // Store the generated order number in local storage
+        localStorage.setItem('orderNumber', orderNumber);
+    } else {
+        // If order number already exists in local storage, use the existing one
+        orderNumber = parseInt(orderNumber); // Parse string to integer
+    }
+    // Update the content of the span element
+    orderNumberElement.textContent = orderNumber;
+}
+
+// Call the function initially to generate and display the order number
+generateOrderNumber();
+
+
+// Call the function to populate the order details section
+populateOrderDetails();
 
     </script>
     
