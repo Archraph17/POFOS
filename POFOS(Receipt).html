@@ -90,14 +90,39 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the store name from the URL query parameters
+    var urlParams = new URLSearchParams(window.location.search);
+    var storeName = urlParams.get('store');
+
+    // Display the store name on the page
+    var storeNameElement = document.getElementById('storeName');
+    if (storeNameElement) {
+        storeNameElement.textContent = storeName;
+    }
+});
+
 // Function to generate and display the order number
 function generateOrderNumber() {
     var orderNumberElement = document.getElementById('orderNumber');
-    // Generate a random order number between 10 and 999 (2 or 3 digits)
-    var orderNumber = Math.floor(Math.random() * 500) + 10; // Random number between 10 and 999
+    // Check if the order number is already stored in local storage
+    var orderNumber = localStorage.getItem('orderNumber');
+    if (!orderNumber) {
+        // Generate a random order number between 10 and 999 (2 or 3 digits)
+        orderNumber = Math.floor(Math.random() * 99) + 10; // Random number between 10 and 999
+        // Store the generated order number in local storage
+        localStorage.setItem('orderNumber', orderNumber);
+    } else {
+        // If order number already exists in local storage, use the existing one
+        orderNumber = parseInt(orderNumber); // Parse string to integer
+    }
     // Update the content of the span element
     orderNumberElement.textContent = orderNumber;
 }
+
+
 
 // Function to update the date and time
 function updateDateTime() {
@@ -119,7 +144,6 @@ function populateReceipt() {
         // Populate customer name, store name, and order number
         document.getElementById('customerName').textContent = receiptInfo.customerName;
         document.getElementById('storeName').textContent = receiptInfo.storeName;
-        document.getElementById('orderNumber').textContent = receiptInfo.orderNumber;
 
         // Clear the order list before populating it again
         orderList.innerHTML = '';
@@ -131,6 +155,10 @@ function populateReceipt() {
             orderList.appendChild(listItem);
         });
 
+        localStorage.setItem('totalAmount', receiptInfo.totalAmount);
+        localStorage.setItem('cashAmount', receiptInfo.cashAmount);
+        localStorage.setItem('changeAmount', receiptInfo.change);
+
         // Update total amount, cash amount, and total change
         document.getElementById('totalAmount').textContent = 'Php ' + parseFloat(receiptInfo.totalAmount).toFixed(2);
         document.getElementById('cashAmount').textContent = 'Php ' + parseFloat(receiptInfo.cashAmount).toFixed(2);
@@ -138,9 +166,8 @@ function populateReceipt() {
     }
 }
 
-// Function to pass receipt information to the order history page
 function passReceiptInfo() {
-    var receiptInfo = localStorage.getItem('receiptInfo');
+    var receiptInfo = JSON.stringify(localStorage.getItem('receiptInfo')); // Stringify the receipt info
     if (receiptInfo) {
         // Encode the receipt information in the URL parameters
         var encodedReceiptInfo = encodeURIComponent(receiptInfo);
