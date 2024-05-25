@@ -1,5 +1,5 @@
 body{
-    background-color: #7AA765;
+  background-color: rgb(249, 216, 160);
     font-family: 'Inria Sans', sans-serif;
 }
 
@@ -14,8 +14,8 @@ body{
 }
 
 .navbar {
-    background-color: #29774D;
-    border: solid 1px #EFC900;
+  background-color: #DAF7C3;
+  border-bottom: solid 3px #F17978;
     display: flex;
     justify-content: center;
     align-items: center;
