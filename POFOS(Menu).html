@@ -92,7 +92,7 @@
                                 <div class="col-md-auto mb-2">
                                     <div class="food">
                                         <img src="burger1.jpg" width="150px" height="100px">
-                                        <h6>Rice n  w/Egg</h6>
+                                        <h6>Rice n Sisig w/Egg</h6>
                                         <h6>Php 50</h6>
                                         <button class="ordernow">Select</button>
                                     </div>
@@ -242,8 +242,8 @@
                                 </div>
                             </div>
                             <div class="container mb-2 d-flex justify-content-end align-items-center">
-                                <button class="btn mr-2" id="addToCartBtn" disabled><a href="POFOS(Orders).html" style="color: black; text-decoration: none;">Add to Cart</a></button>
-                                <button class="btn" id="checkoutBtn" disabled><a href="POFOS(Receipt).html" style="color: black; text-decoration: none;">Checkout</a></button>
+                                <button class="btn mr-2" id="addToCartBtn" disabled><a style="color: black; text-decoration: none;">Add to Cart</a></button>
+                                <button class="btn" id="checkoutBtn" disabled><a style="color: black; text-decoration: none;">Checkout</a></button>
                             </div>                        
                         </div>
                     </div>
@@ -279,8 +279,36 @@ document.addEventListener("DOMContentLoaded", function() {
     if (storeNameElement) {
         storeNameElement.textContent = storeName;
     }
+
+    // Disable cash amount input initially if the cart is empty
+    var cartItems = document.querySelectorAll('.cart-row');
+    var cashAmountInput = document.getElementById('amount');
+    var addToCartBtn = document.getElementById('addToCartBtn');
+    var checkoutBtn = document.getElementById('checkoutBtn');
+    if (cartItems.length === 0) {
+        cashAmountInput.disabled = true;
+        addToCartBtn.disabled = true;
+        checkoutBtn.disabled = true;
+    }
 });
 
+// Function to update cart status and enable/disable cash amount input
+function updateCartStatus() {
+    var cartItems = document.querySelectorAll('.cart-row');
+    var cashAmountInput = document.getElementById('amount');
+    var addToCartBtn = document.getElementById('addToCartBtn');
+    var checkoutBtn = document.getElementById('checkoutBtn');
+    
+    if (cartItems.length === 0) {
+        cashAmountInput.disabled = true;
+        addToCartBtn.disabled = true;
+        checkoutBtn.disabled = true;
+    } else {
+        cashAmountInput.disabled = false;
+        addToCartBtn.disabled = false;
+        checkoutBtn.disabled = false;
+    }
+}
 
 
         // Hide all menu items except for the specified type
@@ -351,9 +379,9 @@ selectButtons.forEach(function(button) {
         var foodName = button.parentNode.querySelector('h6').innerText;
         var foodPrice = button.parentNode.querySelector('h6:nth-of-type(2)').innerText;
         selectFood(foodName, foodPrice);
+        updateCartStatus(); // Update cart status after selecting food
     });
 });
-
 
 // Event listener for removing items from the cart
 document.addEventListener('click', function(event) {
@@ -361,6 +389,7 @@ document.addEventListener('click', function(event) {
         event.target.parentElement.remove();
         // Update the total amount displayed
         updateTotal();
+        updateCartStatus(); // Update cart status after removing item
     }
 });
 
@@ -408,30 +437,28 @@ cashAmountInput.addEventListener('input', function() {
         addToCartBtn.disabled = true;
         checkoutBtn.disabled = true;
     }
+
+    // Calculate change
+    var change = cashAmount - totalAmount;
+    var changeElement = document.getElementById('changeAmount');
+    changeElement.textContent = 'Php ' + (isNaN(change) ? '0' : change.toFixed(2));
 });
 
-// Get the parent form element of the buttons
-var addToCartForm = document.getElementById('addToCartBtn');
-var checkoutForm = document.getElementById('checkoutBtn');
+// Initial update of total and cart status
+updateTotal();
+updateCartStatus();
 
-// Event listener for the "Add to Cart" button
-addToCartForm.addEventListener('submit', function(event) {
-    if (addToCartBtn.disabled) {
-        event.preventDefault(); // Prevent the default behavior of the form
-    }
-});
 
-// Event listener for the "Checkout" button
-checkoutForm.addEventListener('submit', function(event) {
-    if (checkoutBtn.disabled) {
-        event.preventDefault(); // Prevent the default behavior of the form
-    }
-});
+
 
 
 var checkoutBtn = document.getElementById('checkoutBtn');
 checkoutBtn.addEventListener('click', function(event) {
     if (!checkoutBtn.disabled) {
+        // Retrieve store name from the URL query parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var storeName = urlParams.get('store');
+
         // Retrieve cart orders
         var cartItems = document.querySelectorAll('.cart-row');
         var receiptData = [];
@@ -444,12 +471,13 @@ checkoutBtn.addEventListener('click', function(event) {
             receiptData.push({ foodName: foodName, quantity: quantity, price: price });
         });
 
-        // Store cart orders, total, cash amount, and change in local storage
+        // Store cart orders, total, cash amount, change, and store name in local storage
         var totalAmount = parseFloat(document.getElementById('totalAmount').innerText.replace('Php ', ''));
         var cashAmount = parseFloat(document.getElementById('amount').value);
         var change = cashAmount - totalAmount;
 
         var receiptInfo = {
+            storeName: storeName,
             cartOrders: receiptData,
             totalAmount: totalAmount.toFixed(2),
             cashAmount: cashAmount.toFixed(2),
@@ -465,8 +493,13 @@ checkoutBtn.addEventListener('click', function(event) {
     }
 });
 
+
 // Function to handle adding items to the cart and redirecting to the orders page
 function addToCartAndRedirect() {
+        // Retrieve store name from the URL query parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var storeName = urlParams.get('store');
+        
     // Retrieve cart orders
     var cartItems = document.querySelectorAll('.cart-row');
     var receiptData = [];
@@ -485,6 +518,7 @@ function addToCartAndRedirect() {
     var change = cashAmount - totalAmount;
 
     var receiptInfo = {
+        storeName: storeName,
         cartOrders: receiptData,
         totalAmount: totalAmount.toFixed(2),
         cashAmount: cashAmount.toFixed(2),
@@ -497,16 +531,18 @@ function addToCartAndRedirect() {
     window.location.href = "POFOS(Orders).html";
 }
 
-
 // Event listener for the "Add to Cart" button
 var addToCartBtn = document.getElementById('addToCartBtn');
-addToCartBtn.addEventListener('click', function(event) {
-    if (!addToCartBtn.disabled) {
-        addToCartAndRedirect();
-    } else {
-        event.preventDefault(); // Prevent the default behavior of the button if disabled
-    }
-});
+if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function(event) {
+        if (!addToCartBtn.disabled) {
+            addToCartAndRedirect();
+        } else {
+            event.preventDefault(); // Prevent the default behavior of the button if disabled
+        }
+    });
+}
+
 
 
 $(document).ready(function(){
