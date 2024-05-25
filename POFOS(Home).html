@@ -31,7 +31,7 @@
   <div class="sidebar" id="sidebar">
     <ul class="navbar-nav ml-2 mt-1">
       <li class="nav-item mt-1 active">
-        <a class="nav-link" href="POFOS(Orders).html">View Orders</a>
+        <a class="nav-link" href="POFOS(Orders).html" onclick="clearOrderDetails()">View Orders</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="POFOS(Account).html"><i class="fa-regular fa-user" style="margin-right: 10px;"></i>View Accounts</a>
@@ -41,7 +41,7 @@
       </li>
     </ul>
     <div class="logout-container">
-      <a href="POFOS(Login).html" class="btn btn-outline-dark ml-3 w-75" onclick="logout()">Logout</a>
+      <button class="btn btn-outline-dark ml-3 w-75" onclick="logout()">Logout</button>
     </div>
   </div>  
 
@@ -56,14 +56,6 @@
               </div>
               <div class="col-md-auto paragraph-container">
                 <i>“Pick your store that you liked and we’ll serve what you deserve.”</i>
-              </div>
-            </div>
-            <div class="col-md-10 mt-1 main-content-container">
-              <div class="col-md-auto main-content">
-                <h2><strong>!REMINDER!</strong></h2>
-              </div>
-              <div class="col-md-auto paragraph-container">
-                <i>You are unable to order with 1 unsettled order, please comply to that store first. Thank you!</i>
               </div>
             </div>
           </div>
@@ -122,7 +114,7 @@
     </div>
     <div class="row mt-1">
     <div class="col-md-4 mb-3">
-        <a href="POFOS(Menu).html?image=Rd.jpg&store=Rd" class="store-link">
+        <a href="POFOS(Menu).html?image=Rd.jpg&store=Rd%20Royal" class="store-link">
             <img src="Rd.jpg" class="img-fluid img-button" alt="Image 1">
         </a>
     </div>
@@ -174,6 +166,19 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
   <script>
+
+    // Function to handle logout
+function logout() {
+    // Clear all data stored in local storage
+    localStorage.clear();
+
+    // Reset any necessary variables
+    // For example, you can reset the order number
+    localStorage.removeItem('orderNumber');
+
+    // Redirect the user to the login page
+    window.location.href = 'POFOS(Login).html';
+}
     
     function toggleSidebar() {
   var sidebar = document.getElementById('sidebar');
@@ -211,7 +216,11 @@ document.addEventListener('click', function(event) {
   }
 });
 
-
+// Function to clear order details from local storage
+function clearOrderDetails() {
+    // Clear the order details from the local storage
+    localStorage.removeItem('cartOrders');
+}
 
 
 $(document).ready(function(){
