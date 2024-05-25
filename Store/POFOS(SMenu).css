@@ -29,11 +29,21 @@ body {
     flex-direction: row; /* Arrange buttons in a row */
   }
   
-  .navbar .navbar-nav button {
-    margin-right: 10px; /* Add some space between buttons */
-  }
-  
-  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px; /* Adjust width as needed */
+    height: 100%;
+    background-color: #f8f9fa; /* Example background color */
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Example shadow */
+    z-index: 1000; /* Ensure sidebar is on top of other content */
+    display: none;
+}
+
+
 
   .img-fluid {
     width: 280px; 
@@ -202,16 +212,15 @@ color: red;
 }
 
 /* Receipt Button Styles */
-.receipt-button {
+.receipt-button, .account-button {
   background-color: #29774D; /* Adjust as needed */
   color: rgb(0, 0, 0);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  margin-right: 10px;
 }
 
-.receipt-button:hover {
+.receipt-button:hover, .account-button:hover {
   background-color: #245f42; /* Adjust as needed */
 }
 
@@ -231,5 +240,15 @@ color: red;
 /* Icon Styles */
 .fa-receipt {
   margin-right: 5px;
+}
+
+.notification-dot {
+  width: 9px; /* Adjust size as needed */
+  height: 9px; /* Adjust size as needed */
+  background-color: rgb(15, 15, 15); /* Color of the dot */
+  border-radius: 50%; /* To make it a circle */
+  position: absolute; /* Position it relative to its parent */
+  top: 17px; /* Adjust position as needed */
+  right: 200px; /* Adjust position as needed */
 }
 
