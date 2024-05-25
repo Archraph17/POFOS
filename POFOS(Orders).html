@@ -32,9 +32,9 @@
                 <div class="card-body" id="orderCardBody">
                   <h5 class="card-title">Store Name: <span id="storeName"></span></h5>
                   <!-- Order details will be added here dynamically -->
-                  <div id="orderDetails">
-                  </div>
-                  <button id="removeAllButton" class="btn btn-danger mt-3">Remove</button>
+                  <ul id="orderDetails">
+                  </ul>
+                  <button id="removeAllButton" class="btn btn-danger btn-remove">Remove</button>
                 </div>
               </div>
             </div>
@@ -42,12 +42,12 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="checkout-container1">
-            <div class="checkout-container" id="checkoutContainer">
+      <div class="col-md-5">
+        <div class="checkout-container1" id="checkoutContainer" style="display: none;">
+            <div class="checkout-container">
             <!-- Checkout content will be added here dynamically -->
-          </div><hr>
-          <div class="checkout-controls" id="checkoutControls" style="display: none;">
+          </div>
+          <div class="checkout-controls" id="checkoutControls">
             <h6><span id="totalAmount"></span></h6>
             <h6><span id="cashAmount"></span></h6>
             <h6><span id="totalChange"></span></h6>
@@ -63,12 +63,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    // Retrieve the store name from the query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const storeName = urlParams.get('store');
-
-// Set the store name to the span element
-document.getElementById('storeName').textContent = storeName;
 
 // Retrieve cart items from local storage
 var receiptInfo = localStorage.getItem('receiptInfo');
@@ -76,10 +70,13 @@ if (receiptInfo) {
     receiptInfo = JSON.parse(receiptInfo);
     var cartOrders = receiptInfo.cartOrders;
 
+    // Display the store name
+    document.getElementById('storeName').textContent = receiptInfo.storeName;
+
     // Display cart orders on the page
     var orderDetails = document.getElementById('orderDetails');
     cartOrders.forEach(function(order, index) {
-        var orderItem = document.createElement('div');
+        var orderItem = document.createElement('li');
         orderItem.textContent = order.foodName + ' - Quantity: ' + order.quantity + ', Price: ' + order.price;
         orderDetails.appendChild(orderItem);
     });
@@ -90,11 +87,30 @@ if (receiptInfo) {
     document.getElementById('totalChange').textContent = 'Total Change: Php ' + receiptInfo.change;
 }
 
-// Add click event to card-body
+// Add click event to card-body to toggle checkout container display
 document.getElementById('orderCardBody').addEventListener('click', function() {
-    // Toggle display of checkout controls
-    var checkoutControls = document.getElementById('checkoutControls');
-    checkoutControls.style.display = checkoutControls.style.display === 'none' ? 'block' : 'none';
+    // Check if there are any order details
+    if (receiptInfo && receiptInfo.cartOrders.length > 0) {
+        var checkoutContainer = document.getElementById('checkoutContainer');
+        checkoutContainer.style.display = checkoutContainer.style.display === 'none' ? 'block' : 'none';
+    }
+});
+
+// Add click event to Checkout button
+document.getElementById('checkoutButton').addEventListener('click', function() {
+    // Store the receipt information in a separate local storage item
+    localStorage.setItem('receiptInfo', JSON.stringify(receiptInfo));
+
+    // Clear the order details from the local storage
+    localStorage.removeItem('cartOrders');
+
+    // Remove order details from the page
+    var orderDetails = document.getElementById('orderDetails');
+    orderDetails.innerHTML = '';
+
+    // Redirect to the receipt page with order details
+    var orderDetails = encodeURIComponent(JSON.stringify(receiptInfo));
+    window.location.href = 'POFOS(Receipt).html?orderDetails=' + orderDetails;
 });
 
 // Add click event to Remove All button
@@ -104,12 +120,7 @@ document.getElementById('removeAllButton').addEventListener('click', function() 
     location.reload(); // Refresh the page to reflect changes
 });
 
-// Add click event to Checkout button
-document.getElementById('checkoutButton').addEventListener('click', function() {
-    // Redirect to the receipt page with order details
-    var orderDetails = encodeURIComponent(JSON.stringify(receiptInfo));
-    window.location.href = 'POFOS(Receipt).html?orderDetails=' + orderDetails;
-});
+
   </script>
 </body>
 </html>
