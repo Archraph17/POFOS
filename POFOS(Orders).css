@@ -1,11 +1,11 @@
 body {
-  background-color: #7AA765;
+  background-color: rgba(249, 216, 160, 0.555);
   font-family: 'Inria Sans', sans-serif;
 }
 
 .navbar {
-  background-color: #29774D;
-  border: solid 1px #EFC900;
+  background-color: #DAF7C3;
+  border-bottom: solid 3px #F17978;
   justify-content: center;
   align-items: center;
 }
@@ -37,7 +37,7 @@ body {
 }
 
 .back-button {
-  background-color: #7AA765;
+  background-color: rgb(249, 216, 160);
   height: auto;
   width: auto;
   padding: 10px;
@@ -75,7 +75,6 @@ body {
 .checkout-controls {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 
 .checkout-button{
