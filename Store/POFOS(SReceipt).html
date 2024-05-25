@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/inria-sans" rel="stylesheet">
+  <link rel="stylesheet" href="POFOS(SReceipt).css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="POFOS(Home).html">
+      <img src="image.png" alt="PLMUN Logo">
+    </a>
+    <a class="back-button" style="color: black; text-decoration-line: none;" onclick="javascript:history.back()">Back</a>
+  </nav>
+
+  <h3 style="text-align: center; margin: 20px;"><strong>Store Receipt</strong></h3>
+
+  <div class="container">
+    <div class="row">
+      <!-- History container -->
+      <div class="col-md-7">
+        <!-- Container for order history -->
+        <div class="history-container">
+          <div class="history-card">
+            <!-- Modify the class to 'cart-card' -->
+            <div class="cart-card">
+              <div class="col-md-auto d-flex justify-content-between">
+                <div class="statinfo-container" id="statusInfo"><strong>Name & ID: (Consumer's Name)/(Consumer's ID)</strong>
+                  <div class="order-number-container">
+                    <strong>Order No. <span id="orderNumber"></span></strong>
+                  </div>
+                </div>
+                <div class="status-bar"></div>
+              </div>                            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Receipt container -->
+      <div class="col-md-5">
+        <!-- Receipt Container -->
+        <div class="receipt-container" id="receiptContainer">
+          <h4 style="text-align: center;">Receipt</h4>
+          <!-- Customer Name -->
+          <div class="mb-1">
+            <strong>Name:</strong>
+            <span id="customerName"></span>
+          </div>
+          <!-- Date & Time -->
+          <div class="mb-1">
+            <strong>Date & Time:</strong>
+            <span id="dateTime"></span>
+          </div>
+          <hr>
+          <!-- Orders -->
+          <div>
+            <strong>Orders</strong>
+            <ul id="orderList">
+            </ul>
+            <hr>
+            <h6>Total: <span id="totalAmount"></span></h6>
+            <h6>Cash Amount: <span id="cashAmount"></span></h6>
+            <h6>Total Change: <span id="totalChange"></span></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+
+       // Event listener for description containers
+    document.querySelectorAll('.cart-card').forEach(function(description) {
+      description.addEventListener('click', function() {
+        // Toggle the display of the receipt container when a description is clicked
+        document.getElementById('receiptContainer').style.display = 'block';
+      });
+    });
+
+    // Function to update the date and time
+function updateDateTime() {
+    var now = new Date();
+    var dateTimeElement = document.getElementById('dateTime');
+    // Format the date and time
+    var formattedDate = now.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    var formattedTime = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
+    var formattedDateTime = formattedDate + ' ' + formattedTime;
+    // Update the content of the span element
+    dateTimeElement.textContent = formattedDateTime;
+}
+
+// Function to populate the receipt with order details
+function populateReceipt() {
+    var orderList = document.getElementById('orderList');
+    var receiptInfo = JSON.parse(localStorage.getItem('receiptInfo'));
+    if (receiptInfo) {
+        // Populate customer name, store name, and order number
+        document.getElementById('customerName').textContent = receiptInfo.customerName;
+
+        // Clear the order list before populating it again
+        orderList.innerHTML = '';
+
+        // Iterate over the array to create list items for each order
+        receiptInfo.cartOrders.forEach(function(order) {
+            var listItem = document.createElement('li');
+            listItem.textContent = order.quantity + 'x ' + order.foodName + ' - ' + order.price;
+            orderList.appendChild(listItem);
+        });
+
+        localStorage.setItem('totalAmount', receiptInfo.totalAmount);
+        localStorage.setItem('cashAmount', receiptInfo.cashAmount);
+        localStorage.setItem('changeAmount', receiptInfo.change);
+
+        // Update total amount, cash amount, and total change
+        document.getElementById('totalAmount').textContent = 'Php ' + parseFloat(receiptInfo.totalAmount).toFixed(2);
+        document.getElementById('cashAmount').textContent = 'Php ' + parseFloat(receiptInfo.cashAmount).toFixed(2);
+        document.getElementById('totalChange').textContent = 'Php ' + parseFloat(receiptInfo.change).toFixed(2);
+    }
+}
+
+
+
+    // Function to generate a random ID for availableButton
+    function generateRandomId() {
+      return Math.floor(Math.random() * 13);
+    }
+
+    // Function to generate and display the order number
+    function generateOrderNumber() {
+        var orderNumberElement = document.getElementById('orderNumber');
+        // Check if the order number is already stored in local storage
+        var orderNumber = localStorage.getItem('orderNumber');
+        if (!orderNumber) {
+            // Generate a random order number between 10 and 999 (2 or 3 digits)
+            orderNumber = Math.floor(Math.random() * 99) + 10; // Random number between 10 and 999
+            // Store the generated order number in local storage
+            localStorage.setItem('orderNumber', orderNumber);
+        } else {
+            // If order number already exists in local storage, use the existing one
+            orderNumber = parseInt(orderNumber); // Parse string to integer
+        }
+        // Update the content of the span element
+        orderNumberElement.textContent = orderNumber;
+    }
+
+    updateDateTime();
+    // Call the function initially to generate and display the order number
+    generateOrderNumber();
+
+    // Call the function initially to populate the receipt with order details
+    populateReceipt();
+  </script>
+
+</body>
+</html>
