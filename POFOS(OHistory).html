@@ -28,8 +28,8 @@
         <div class="history-container">
           <div class="history-card">
             <div class="history-description" data-receipt-id="1">
-              <h7>Store:<br></h7>
-              <h7>Order No.<br></h7>
+              <h7>Store: <span id="storeName"></span><br></h7>
+              <h7>Order No. <span id="orderNumber"></span><br></h7>
               Click to view receipt >>
             </div>
           </div>
@@ -51,11 +51,6 @@
             <strong>Date & Time:</strong>
             <span id="dateTime"></span>
           </div>
-          <!-- Store Name -->
-          <div class="mb-1">
-            <strong>Store:</strong>
-            <span id="storeName"></span>
-          </div>
           <hr>
           <!-- Orders -->
           <div>
@@ -63,13 +58,9 @@
             <ul id="orderList">
             </ul>
             <hr>
-            <h6>Total: <span id="totalAmount">Php 0.00</span></h6>
-            <h6>Cash Amount: <span id="cashAmount">Php 0.00</span></h6>
-            <h6>Total Change: <span id="totalChange">Php 0.00</span></h6>
-          </div>
-          <div class="order-number-container md-auto">
-            <strong>Order Number:</strong><br>
-            <span id="orderNumber"></span>
+            <h6>Total: <span id="totalAmount"></span></h6>
+            <h6>Cash Amount: <span id="cashAmount"></span></h6>
+            <h6>Total Change: <span id="totalChange"></span></h6>
           </div>
         </div>
       </div>
@@ -89,6 +80,69 @@
       });
     });
 
+// Function to generate and display the order number
+function generateOrderNumber() {
+    var orderNumberElement = document.getElementById('orderNumber');
+    // Check if the order number is already stored in local storage
+    var orderNumber = localStorage.getItem('orderNumber');
+    if (!orderNumber) {
+        // Generate a random order number between 10 and 999 (2 or 3 digits)
+        orderNumber = Math.floor(Math.random() * 500) + 10; // Random number between 10 and 999
+        // Store the generated order number in local storage
+        localStorage.setItem('orderNumber', orderNumber);
+    }
+    // Update the content of the span element
+    orderNumberElement.textContent = orderNumber;
+}
+
+    // Function to update the date and time
+function updateDateTime() {
+    var now = new Date();
+    var dateTimeElement = document.getElementById('dateTime');
+    // Format the date and time
+    var formattedDate = now.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    var formattedTime = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
+    var formattedDateTime = formattedDate + ' ' + formattedTime;
+    // Update the content of the span element
+    dateTimeElement.textContent = formattedDateTime;
+}
+
+    // Function to populate the receipt with order details
+function populateReceipt() {
+    var orderList = document.getElementById('orderList');
+    var receiptInfo = JSON.parse(localStorage.getItem('receiptInfo'));
+    if (receiptInfo) {
+        // Populate customer name, store name, and order number
+        document.getElementById('customerName').textContent = receiptInfo.customerName;
+        document.getElementById('storeName').textContent = receiptInfo.storeName;
+
+        // Clear the order list before populating it again
+        orderList.innerHTML = '';
+
+        // Iterate over the array to create list items for each order
+        receiptInfo.cartOrders.forEach(function(order) {
+            var listItem = document.createElement('li');
+            listItem.textContent = order.quantity + 'x ' + order.foodName + ' - ' + order.price;
+            orderList.appendChild(listItem);
+        });
+
+        // Update total amount, cash amount, and total change
+        document.getElementById('totalAmount').textContent = 'Php ' + parseFloat(receiptInfo.totalAmount).toFixed(2);
+        document.getElementById('cashAmount').textContent = 'Php ' + parseFloat(receiptInfo.cashAmount).toFixed(2);
+        document.getElementById('totalChange').textContent = 'Php ' + parseFloat(receiptInfo.change).toFixed(2);
+    }
+}
+
+// Call the function initially to display the current date and time
+updateDateTime();
+
+// Call the function initially to generate and display the order number
+generateOrderNumber();
+
+    // Update receipt content when the page loads
+window.onload = function() {
+    populateReceipt();
+};
     
   </script>
   
