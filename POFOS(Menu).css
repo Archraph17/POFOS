@@ -40,10 +40,10 @@
           border: black solid 1px;
           padding: 5px;
           border-radius: 5px;
-          background-color: #29774d3a;
+          background-color: #29774d40;
           max-height: 600px; /* Adjust the max-height as needed */
           overflow-y: auto; /* Enable vertical scrollbar */
-          scrollbar-width: thin; /* Custom scrollbar for Firefox */
+          scrollbar-width: thick; /* Custom scrollbar for Firefox */
       }
 
       .menu-content::-webkit-scrollbar {
@@ -51,12 +51,13 @@
     }
 
     .menu-content::-webkit-scrollbar-track {
-        background: transparent; /* Track color */
+        background: wheat; /* Track color */
     }
 
     .menu-content::-webkit-scrollbar-thumb {
-        background-color: #888; /* Thumb color */
-        border-radius: 4px; /* Rounded corners */
+        background-color: #00000050; /* Thumb color */
+        border-radius: 3px; /* Rounded corners */
+        border: rgba(0, 0, 0, 0.5) solid 1px;
     }
 
     .menu-item {
@@ -138,10 +139,16 @@
         }
 
     .ordernow{
-      border: none;
+      border: black solid 1px;
       border-radius: 50px;
       background-color:#29774D;
-      width: 70%;
+      width: 100%;
+      }
+      .img-menu{
+        width: 160px;
+        height: 100px;
+        border-radius: 5px;
+        border: black solid 1px;
       }
 
       .food{
